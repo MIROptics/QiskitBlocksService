@@ -13,11 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, redirect
 from api import run_qasm, get_statevector, get_unitary
 import json_tricks
 
 app = Flask(__name__)
+route_prefix = "/_"
 
 
 @app.route('/')
@@ -25,7 +26,7 @@ def welcome():
     return "Hi Qiskitter!"
 
 
-@app.route('/api/run/qasm', methods=['GET'])
+@app.route(route_prefix + '/api/run/qasm', methods=['GET'])
 def qasm():
     qasm = request.args['qasm']
     backend = request.args['backend']
@@ -40,7 +41,7 @@ def qasm():
     return jsonify(ret)
 
 
-@app.route('/api/run/statevector', methods=['GET'])
+@app.route(route_prefix + '/api/run/statevector', methods=['GET'])
 def statevector():
     qasm = request.args['qasm']
     backend = request.args['backend']
@@ -53,7 +54,7 @@ def statevector():
     return ret_val
 
 
-@app.route('/api/run/unitary', methods=['GET'])
+@app.route(route_prefix + '/api/run/unitary', methods=['GET'])
 def unitary():
     qasm = request.args['qasm']
     backend = request.args['backend']
