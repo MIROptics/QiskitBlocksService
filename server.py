@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-from flask import Flask, jsonify, request, redirect
+from flask import Flask, jsonify, request
 from api import run_qasm, get_statevector, get_unitary
 import json_tricks
 
